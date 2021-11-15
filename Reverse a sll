@@ -1,0 +1,76 @@
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+
+struct node{
+	int data;
+	struct node *next;
+};
+struct node *head;
+
+
+void create(){
+    struct node *temp,*newnode;
+int i,n,ch;
+scanf("%d",&n);
+    for(i=0;i<n;i++){
+
+newnode= (struct  node*)malloc(sizeof(struct node));
+// printf("\n Enter the data \n");
+scanf("%d",&newnode->data);
+
+newnode->next=NULL;
+if(head==0){
+    temp=head=newnode;
+}
+	else{
+	    
+	    
+	   // while(temp!=0){
+	   //     temp=temp->next;
+	   // }
+	    temp->next=newnode;
+	    temp=newnode;
+	}
+// 	printf("Do you wish to continue [1/0]: ");
+//         scanf("%d", &ch);
+	
+}
+}
+
+
+void reverse(){
+	struct node *temp, *prev=NULL, *next=NULL;
+        temp=head;
+        while (temp != NULL)
+            {
+            next = temp->next;
+            temp->next = prev;
+            prev = temp;
+            temp = next;
+            }
+        head = prev;
+        // printf("reverse string is:\n");
+        while(head!=NULL)
+        {
+            printf("%d ",head->data);
+            head=head->next;
+        }
+}
+
+
+int main(){
+	
+
+create();
+// printf("Reversing the list...\n");
+// printList();
+// printf("Displaying the reversed list:\n");
+
+reverse();
+
+
+  
+    
+}

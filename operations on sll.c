@@ -1,3 +1,11 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -112,15 +120,20 @@ printf("\n Enter the data \n");
 scanf("%d",&newnode->data);
 printf("Enter position");
 scanf("%d",&pos);
-while(temp!=0){
-    count++;
-    temp= temp->next;
-}
-if(pos>count || pos<0){
-    printf("Invalid position");
+newnode->next =0;
+// while(temp!=0){
+//     count++;
+//     temp= temp->next;
+// }
+// if(pos>count){
+//     printf("Invalid position");
+// }
+if(pos==0){
+    newnode->next =head;
+    head=newnode;
 }
 else {
-    while(i<pos-1){
+    while(i<pos){
         temp= temp->next;
         i++;
     }
@@ -130,17 +143,72 @@ else {
 }
 
 void delete_begin(){
-    
+    struct node *temp;
+    if(head==0){
+        printf("list is empty");
+        exit(1);
+    }
+    else{
+    temp=head;
+    head=head->next;
+    free(temp);
 }
 
+}
 
 void delete_end(){
-    
+     struct node *temp, *prevtemp;
+     
+     if(head==0){
+        printf("list is empty");
+        exit(0);
+    }
+    else if(head->next ==0)
+        {
+                temp=head;
+                temp=0;
+                printf("\n The deleted element is:%d \t",temp->data);
+                free(temp);
+        }
+    else{
+        temp=head;
+    while(temp->next!=0){
+        
+        prevtemp=temp;
+        temp=temp->next;
+    }
+    prevtemp->next =0;
+    free(temp);
+    }
 }
 
 
 void delete_pos(){
-    
+    int i=1 ,pos;
+    printf("enter the position");
+    scanf("%d",&pos);
+    struct node *temp, *nexttemp;
+    temp=head;
+      if(head==0)
+        {
+                printf("\n The Linked List is Empty:\n");
+                exit(0);
+        }
+        else{
+            if(pos==1){
+                head=head->next;
+                free(temp);
+            }
+            else{
+    while(i<pos-1){
+        temp=temp->next;
+        i++;
+    }
+    nexttemp=temp->next;
+    temp->next=nexttemp->next;
+    free(nexttemp);
+}
+}
 }
 
 int main(){
@@ -199,4 +267,3 @@ while(1){
 return 0;
    
 }
-

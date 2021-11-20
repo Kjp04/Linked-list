@@ -1,0 +1,255 @@
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+
+struct node{
+	int data;
+	struct node *prev;
+	struct node *next;
+};
+struct node *head, *tail;
+
+
+void create(){
+    struct node *newnode;
+int ch;
+   while(ch){
+
+newnode= (struct  node*)malloc(sizeof(struct node));
+printf("\n Enter the data \n");
+scanf("%d",&newnode->data);
+newnode->prev=NULL;
+newnode->next=NULL;
+if(head==0){
+    tail=head=newnode;
+}
+	else{
+	    tail->next = newnode;
+	    newnode->prev = tail;
+	    tail=newnode;
+	    
+	   // newnode->prev = temp;
+	   // temp->next=newnode;
+	   // temp=newnode;
+	}
+printf("Do you wish to continue [1/0]: ");
+        scanf("%d", &ch);
+	
+}
+}
+
+
+void reverse(){
+	struct node *temp, *nextnode=NULL;
+        temp=head;
+        while (temp != NULL)
+            {
+            nextnode = temp->next;
+            temp->next = temp->prev;
+            temp->prev = nextnode;
+            temp=nextnode;
+            }
+        temp = head;
+        head=tail;
+        tail=temp;
+        printf("reverse string is:\n");
+        while(head!=NULL)
+        {
+            printf("%d ",head->data);
+            head=head->next;
+        }
+}
+
+
+void display()
+{        struct node *temp;
+     if(head==NULL)
+        {
+                printf("\n Linked List is empty:\n");
+                return;
+        }
+  else{
+      temp=head;
+    while (temp != 0) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+  }
+}
+
+void insert_begin(){
+    struct node *newnode;
+    newnode= (struct  node*)malloc(sizeof(struct node));
+printf("\n Enter the data \n");
+scanf("%d",&newnode->data);
+if(head==0){
+    head=tail=newnode;
+}
+else{
+    newnode->prev=NULL;
+    newnode->next =head;
+    head->prev =newnode;
+    head=newnode;
+}
+}
+
+
+void insert_end(){
+    struct node *newnode;
+    newnode= (struct  node*)malloc(sizeof(struct node));
+printf("\n Enter the data \n");
+scanf("%d",&newnode->data);
+newnode->prev = tail;
+newnode->next =NULL;
+tail->next= newnode;
+tail=newnode;
+}
+
+
+void insert_pos(){
+    struct node *newnode,*temp;
+    int i=1, pos;
+    temp=head;
+    newnode= (struct  node*)malloc(sizeof(struct node));
+printf("\n Enter the data \n");
+scanf("%d",&newnode->data);
+printf("Enter position");
+scanf("%d",&pos);
+newnode->prev =NULL;
+newnode->next =NULL;
+
+if(pos==0){
+    newnode->next =head;
+    head->prev = newnode;
+    head=newnode;
+}
+else {
+    while(i<pos-1){
+        temp= temp->next;
+        i++;
+    }
+    newnode->next = temp->next;
+    newnode->prev = temp;
+    temp->next->prev =newnode;
+    temp->next =newnode;
+}
+}
+
+void delete_begin(){
+    struct node *temp;
+    if(head==0){
+        printf("list is empty");
+        return;
+    }
+    else{
+    temp=head;
+    head=head->next;
+    head->prev = NULL;
+    free(temp);
+}
+
+}
+
+void delete_end(){
+     struct node *temp;
+     
+     if(tail==0){
+        printf("list is empty");
+        return;
+    }
+    
+    else{
+        temp=tail;
+        tail->prev->next = NULL;
+        tail=tail->prev;
+     free(temp);
+    }
+}
+
+
+void delete_pos(){
+    int i=1 ,pos;
+    printf("enter the position");
+    scanf("%d",&pos);
+    struct node *temp;
+    temp=head;
+      if(head==0)
+        {
+                printf("\n The Linked List is Empty:\n");
+                return;
+        }
+        else{
+            if(pos==1){
+                head=head->next;
+                free(temp);
+            }
+            else{
+    while(i<pos){
+        temp=temp->next;
+        i++;
+    }
+   temp->prev->next = temp->next;
+   temp->next->prev= temp->prev;
+   free(temp);
+}
+}
+}
+
+int main(){
+int choice;
+while(1){
+    printf("\n Welcome to operations on Doubly linked list \n");
+    printf("1. Create \n");
+    printf("2. Display\n");
+    printf("3. Insert at beginning\n");
+    printf("4. Insert at end\n");
+    printf("5. Insert at specific position\n");
+    printf("6. Reverse the list\n");
+    printf("7. Delete from beginning\n");
+    printf("8. Delete from end\n");
+    printf("9. Delete from specific position\n");
+    printf("Enter choice");
+    scanf("%d",&choice);
+    switch(choice)
+                {
+                        case 1:
+                                        create();
+                                        break;
+                        case 2:
+                                        display();
+                                        break;
+                        case 3:
+                                        insert_begin();
+                                        break;
+                        case 4:
+                                        insert_end();
+                                        break;
+                        case 5:
+                                        insert_pos();
+                                        break;
+                        case 6:
+                                        reverse();
+                                        break;
+                        case 7:
+                                        delete_begin();
+                                        break;
+                        case 8:
+                                        delete_end();
+                                        break;
+                        case 9:
+                                        delete_pos();
+                                        break;
+                        case 10:
+                                        exit(0);
+                                        break;
+
+                        default:
+                                        printf("\n Wrong Choice:\n");
+                                        break;
+                }
+}
+return 0;
+   
+}

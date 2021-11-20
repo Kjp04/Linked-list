@@ -13,7 +13,7 @@ struct node *head;
 
 void create(){
     struct node *temp,*newnode;
-int i,n,ch;
+int ch;
 // scanf("%d",&n);
    while(ch){
 
